@@ -1,5 +1,7 @@
 'use strict';
 
+// *********************************************** Adding Confetti Styles **********************************************************
+
 // ************************************************************ DOM Elements **********************************************************
 
 // Final Scores of Both Players
@@ -60,7 +62,7 @@ const holdScore = () => {
   // Display Final score
   displayFinalScores[activePlayer].textContent = finalScores[activePlayer];
   // Check if finalScore >= 100 to End  the Game
-  if (finalScores[activePlayer] >= 100) {
+  if (finalScores[activePlayer] >= 20) {
     // Game Over
     gameOver();
   } else {
@@ -87,6 +89,7 @@ const switchPlayers = () => {
 
 const gameOver = () => {
   // adding winner class to Active player and loser class to the other player for Styling
+
   playersEl[activePlayer].classList.add('winner');
   let otherPlayer = activePlayer === 0 ? 1 : 0;
   playersEl[otherPlayer].classList.add('loser');
