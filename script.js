@@ -19,6 +19,8 @@ let activePlayer = 0;
 
 // Variables
 
+const finalsScores = [0, 0];
+
 let currentScore = 0;
 
 // Setting Initial Score Values to 0
@@ -57,3 +59,25 @@ const diceRoll = () => {
 };
 
 rollBtn.addEventListener('click', diceRoll);
+
+// DOM elements for Hold function
+
+const holdBtn = document.querySelector('.btn--hold');
+const displayFinalScores = document.querySelectorAll('.score');
+
+// Creating Score Hold Function
+
+const holdScore = () => {
+  // Add current Score to Final Score
+  finalsScores[activePlayer] += currentScore;
+  // Display Final score
+  console.log(displayFinalScores);
+  displayFinalScores[activePlayer].textContent = finalsScores[activePlayer];
+  // document.getElementById(`score--${activePlayer}`)
+
+  // Switch Player
+  currentScore = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+};
+
+holdBtn.addEventListener('click', holdScore);
