@@ -176,3 +176,16 @@ main {
 .hidden {
   display: none;
 }
+
+.winner {
+  background-color: #031f1c;
+  color: #e7f5f4;
+}
+.winner .score {
+  color: #d62246;
+}
+.loser {
+  background-color: #e7f5f4;
+  color: transparent;
+  visibility: hidden;
+}

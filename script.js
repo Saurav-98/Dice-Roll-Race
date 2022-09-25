@@ -10,6 +10,8 @@ const scorePlayer1 = document.getElementById('score--1');
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
 
+const playersEl = document.querySelectorAll('.player');
+
 // Dice Image
 
 const diceImg = document.querySelector('.dice');
@@ -19,6 +21,7 @@ const diceImg = document.querySelector('.dice');
 const rollBtn = document.querySelector('.btn--roll');
 const playersCurrentScore = document.querySelectorAll('.current-score');
 let activePlayer = 0;
+let otherPlayer = activePlayer === 0 ? 1 : 0;
 
 // Variables
 
@@ -82,6 +85,9 @@ const holdScore = () => {
   // Check if finalScore >= 100 to End  the Game
 
   if (finalsScores[activePlayer] >= 25) {
+    playersEl[activePlayer].classList.add('winner');
+
+    playersEl[otherPlayer].classList.add('loser');
     console.log('Game Over!');
     console.log(`Player ${activePlayer} Wins The Game.`);
   } else {
