@@ -7,6 +7,9 @@
 const scorePlayer0 = document.getElementById('score--0');
 const scorePlayer1 = document.getElementById('score--1');
 
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
+
 // Dice Image
 
 const diceImg = document.querySelector('.dice');
@@ -55,6 +58,8 @@ const diceRoll = () => {
 
     // Switch Player
     activePlayer = activePlayer === 0 ? 1 : 0;
+    player0El.classList.toggle('player--active');
+    player1El.classList.toggle('player--active');
   }
 };
 
@@ -73,11 +78,19 @@ const holdScore = () => {
   // Display Final score
   console.log(displayFinalScores);
   displayFinalScores[activePlayer].textContent = finalsScores[activePlayer];
-  // document.getElementById(`score--${activePlayer}`)
 
-  // Switch Player
-  currentScore = 0;
-  activePlayer = activePlayer === 0 ? 1 : 0;
+  // Check if finalScore >= 100 to End  the Game
+
+  if (finalsScores[activePlayer] >= 25) {
+    console.log('Game Over!');
+    console.log(`Player ${activePlayer} Wins The Game.`);
+  } else {
+    // Switch Player
+    currentScore = 0;
+    activePlayer = activePlayer === 0 ? 1 : 0;
+    player0El.classList.toggle('player--active');
+    player1El.classList.toggle('player--active');
+  }
 };
 
 holdBtn.addEventListener('click', holdScore);
