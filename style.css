@@ -189,3 +189,20 @@ main {
   color: transparent;
   visibility: hidden;
 }
+
+.winner-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 2rem;
+  width: max-content;
+  transform: translate(-50%, -50%);
+  background-color: #17bebb;
+  padding: 2rem;
+  border-radius: 10px;
+  color: #d4f4dd;
+  display: none;
+}
+.winner-box h2 {
+  text-transform: uppercase;
+}

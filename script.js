@@ -21,11 +21,11 @@ const diceImg = document.querySelector('.dice');
 const rollBtn = document.querySelector('.btn--roll');
 const playersCurrentScore = document.querySelectorAll('.current-score');
 let activePlayer = 0;
-let otherPlayer = activePlayer === 0 ? 1 : 0;
+// let otherPlayer = activePlayer === 0 ? 1 : 0;
 
 // Variables
 
-const finalsScores = [0, 0];
+const finalScores = [0, 0];
 
 let currentScore = 0;
 
@@ -56,13 +56,9 @@ const diceRoll = () => {
   } else {
     // Set CurrentScore to 0
     console.log(`Player Out at ${currentScore}`);
-    currentScore = 0;
-    playersCurrentScore[activePlayer].textContent = currentScore;
 
     // Switch Player
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    player0El.classList.toggle('player--active');
-    player1El.classList.toggle('player--active');
+    switchPlayers();
   }
 };
 
@@ -77,26 +73,63 @@ const displayFinalScores = document.querySelectorAll('.score');
 
 const holdScore = () => {
   // Add current Score to Final Score
-  finalsScores[activePlayer] += currentScore;
+  finalScores[activePlayer] += currentScore;
   // Display Final score
-  console.log(displayFinalScores);
-  displayFinalScores[activePlayer].textContent = finalsScores[activePlayer];
+  // console.log(displayFinalScores);
+  displayFinalScores[activePlayer].textContent = finalScores[activePlayer];
 
   // Check if finalScore >= 100 to End  the Game
 
-  if (finalsScores[activePlayer] >= 25) {
-    playersEl[activePlayer].classList.add('winner');
-
-    playersEl[otherPlayer].classList.add('loser');
-    console.log('Game Over!');
-    console.log(`Player ${activePlayer} Wins The Game.`);
+  if (finalScores[activePlayer] >= 12) {
+    gameOver();
   } else {
     // Switch Player
-    currentScore = 0;
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    player0El.classList.toggle('player--active');
-    player1El.classList.toggle('player--active');
+    switchPlayers();
   }
 };
 
 holdBtn.addEventListener('click', holdScore);
+
+const winnerBoxEl = document.querySelector('.winner-box');
+
+const switchPlayers = () => {
+  currentScore = 0;
+  playersCurrentScore[activePlayer].textContent = currentScore;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
+};
+
+const gameOver = () => {
+  playersEl[activePlayer].classList.add('winner');
+  let otherPlayer = activePlayer === 0 ? 1 : 0;
+  playersEl[otherPlayer].classList.add('loser');
+  winnerBoxEl.textContent = `Player ${activePlayer + 1} Wins The Game.`;
+  winnerBoxEl.style.display = 'block';
+  diceImg.classList.add('hidden');
+  rollBtn.style.visibility = 'hidden';
+  holdBtn.style.visibility = 'hidden';
+};
+
+const newGameBtn = document.querySelector('.btn--new');
+
+const resetToStart = () => {
+  let otherPlayer = activePlayer === 0 ? 1 : 0;
+  playersEl[activePlayer].classList.remove('winner');
+  playersEl[otherPlayer].classList.remove('loser');
+  winnerBoxEl.style.display = 'none';
+  rollBtn.style.visibility = 'visible';
+  holdBtn.style.visibility = 'visible';
+  finalScores[0] = 0;
+  finalScores[1] = 0;
+  scorePlayer0.textContent = 0;
+  scorePlayer1.textContent = 0;
+  currentScore = 0;
+  playersCurrentScore[activePlayer].textContent = 0;
+  playersCurrentScore[otherPlayer].textContent = 0;
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+  activePlayer = 0;
+};
+
+newGameBtn.addEventListener('click', resetToStart);
