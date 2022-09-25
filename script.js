@@ -14,6 +14,12 @@ const diceImg = document.querySelector('.dice');
 // DOM Elements for RollDice Function
 
 const rollBtn = document.querySelector('.btn--roll');
+const playersCurrentScore = document.querySelectorAll('.current-score');
+let activePlayer = 0;
+
+// Variables
+
+let currentScore = 0;
 
 // Setting Initial Score Values to 0
 
@@ -28,17 +34,26 @@ const diceRoll = () => {
 
   const diceRollVal = Math.trunc(Math.random() * 6) + 1;
   console.log(diceRollVal);
-  console.log(diceImg.src);
-
   // 2. Display Dice Image
-
   diceImg.src = `./dice-${diceRollVal}.png`;
   // Remove Hide class from Dice Img
   diceImg.classList.remove('hidden');
-
   // 3. Check Is it a 1
-  // 4. Add Dice Value to current Score Value
-  // 5. Display new Current Score
+
+  if (diceRollVal !== 1) {
+    // 4. Add Dice value to current Score
+    currentScore += diceRollVal;
+    // 5. Display new current Value
+    playersCurrentScore[activePlayer].textContent = currentScore;
+  } else {
+    // Set CurrentScore to 0
+    console.log(`Player Out at ${currentScore}`);
+    currentScore = 0;
+    playersCurrentScore[activePlayer].textContent = currentScore;
+
+    // Switch Player
+    activePlayer = activePlayer === 0 ? 1 : 0;
+  }
 };
 
 rollBtn.addEventListener('click', diceRoll);
