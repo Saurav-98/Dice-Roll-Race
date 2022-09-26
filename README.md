@@ -12,6 +12,42 @@ Once the Final score reaches 100 Player can hold the vallue and the Game will en
 
 Player then can restart the game by clicking oon the New game button.
 
+## Roadmap
+
+I have followed this Flowchart to create the basic functionality of the App
+![Flow Chart of the Game Logic]("./pig-game-flowchart.png")
+
+And then added few features to make the Game more accessible Such as
+1- Showing Which player's turn it is
+2- Changing the Button and Dice Score Color When Player gets 1
+3- Switchng the active Window to the next Player
+4- Adding and removing the Winner and Loser class to make the Winner Obvious
+5- Added a small timeOut of 1s to switch the player.
+
+I have tried to make the Code Modular and functional and used appropriate comments from the start but it got over Crowded while adding the later features.
+However the Game is completely functional at the moment and I will be working on it to make the code more performant, readable and scalable.
+
+Any Suggetions and advice on the Project is welcome :)
+
+## 🚀 About Me
+
+My Name is Saurav Kumar Verma.
+I'm a front end developer.
+
+## 🛠 Skills
+
+This Project is created using Vanilla Javascript, CSS and HTML.
+
+## 🔗 Links
+
+Github Repo: https://github.com/Saurav-98/Dice-Roll-Race
+Working Demo: https://dice-roll-race.netlify.app/
+
+My Github Profile: https://github.com/Saurav-98
+Linkedin: https://www.linkedin.com/in/saurav-k-verma/
+
+Contact me on - sauravkumarverma22@gmail.com
+
 ## Color Reference
 
 | Color           | Hex                                                              |
