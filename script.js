@@ -42,12 +42,15 @@ let currentScore = 0;
 // ******************** 1 - Dice Roll Function ************************
 
 const diceRoll = () => {
+  // Show rotating Image
+
   // 1. Generate random dice value
   const diceRollVal = Math.trunc(Math.random() * 6) + 1;
   // 2. Display Dice Image
+  diceImg.classList.remove('hidden');
+
   diceImg.src = `./dice-${diceRollVal}.png`;
   // Remove Hide class from Dice Img
-  diceImg.classList.remove('hidden');
 
   // 2.B - - -  Show the Dice Value
   diceScoreSpan[activePlayer].textContent = 'Dice value: ';
@@ -61,6 +64,7 @@ const diceRoll = () => {
     currentScore += diceRollVal;
     // 5. Display new current Value
     playersCurrentScore[activePlayer].textContent = currentScore;
+    // diceImg.classList.toggle('rotate-center');
   } else {
     // Switch Player
     diceScoreSpan[activePlayer].textContent = 'Oops! You Got.';
@@ -69,7 +73,7 @@ const diceRoll = () => {
 
     scoreHd[activePlayer].style.color = '#d62246';
     scoreHd[activePlayer].textContent = diceRollVal;
-
+    // diceImg.classList.toggle('rotate-center');
     switchPlayers();
   }
 };
@@ -82,7 +86,7 @@ const holdScore = () => {
   // Display Final score
   displayFinalScores[activePlayer].textContent = finalScores[activePlayer];
   // Check if finalScore >= 100 to End  the Game
-  if (finalScores[activePlayer] >= 20) {
+  if (finalScores[activePlayer] >= 100) {
     // Game Over
     gameOver();
   } else {
@@ -95,6 +99,8 @@ const holdScore = () => {
 
 const switchPlayers = () => {
   setTimeout(() => {
+    // Show rotating Image
+
     // Enabling Roll Btn
     rollBtn.style.backgroundColor = '#ffffffcc';
     // Hide Dice Roll Val of prev Player
