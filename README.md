@@ -43,6 +43,8 @@ This Project is created using Vanilla Javascript, CSS and HTML.
 Github Repo: https://github.com/Saurav-98/Dice-Roll-Race
 Working Demo: https://dice-roll-race.netlify.app/
 
+Gameplayy Video : https://www.loom.com/share/833667d7bef849d5ad7efc819f4af6aa
+
 My Github Profile: https://github.com/Saurav-98
 Linkedin: https://www.linkedin.com/in/saurav-k-verma/
 
