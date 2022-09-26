@@ -25,6 +25,12 @@ const displayFinalScores = document.querySelectorAll('.score');
 const winnerBoxEl = document.querySelector('.winner-box');
 const newGameBtn = document.querySelector('.btn--new');
 
+//  **************************  Working on showing Players Turn *************************************
+
+const diceRollBoards = document.querySelectorAll('.dice-score');
+const scoreHd = document.querySelectorAll('.scoreHeading');
+const diceScoreSpan = document.querySelectorAll('.scoreSpan');
+
 // ********************************** Variables *****************************************
 
 let activePlayer = 0;
@@ -42,6 +48,13 @@ const diceRoll = () => {
   diceImg.src = `./dice-${diceRollVal}.png`;
   // Remove Hide class from Dice Img
   diceImg.classList.remove('hidden');
+
+  // 2.B - - -  Show the Dice Value
+  diceScoreSpan[activePlayer].textContent = 'Dice value: ';
+  scoreHd[activePlayer].style.color = '#0b1d51';
+  scoreHd[activePlayer].textContent = diceRollVal;
+  diceRollBoards[activePlayer].style.display = 'flex';
+
   // 3. Check Is it a 1
   if (diceRollVal !== 1) {
     // 4. Add Dice value to current Score
@@ -50,6 +63,13 @@ const diceRoll = () => {
     playersCurrentScore[activePlayer].textContent = currentScore;
   } else {
     // Switch Player
+    diceScoreSpan[activePlayer].textContent = 'Oops! You Got.';
+    // Disabing Roll Btn
+    rollBtn.style.backgroundColor = '#d62246';
+
+    scoreHd[activePlayer].style.color = '#d62246';
+    scoreHd[activePlayer].textContent = diceRollVal;
+
     switchPlayers();
   }
 };
@@ -74,15 +94,23 @@ const holdScore = () => {
 // ******************** 3. Switch Players Function ************************
 
 const switchPlayers = () => {
-  // setting current Value to 0
-  currentScore = 0;
-  // Display Current Value
-  playersCurrentScore[activePlayer].textContent = currentScore;
-  // Switch Active Player
-  activePlayer = activePlayer === 0 ? 1 : 0;
-  // Toggle Active Player Class for the Overlay Highlight
-  player0El.classList.toggle('player--active');
-  player1El.classList.toggle('player--active');
+  setTimeout(() => {
+    // Enabling Roll Btn
+    rollBtn.style.backgroundColor = '#ffffffcc';
+    // Hide Dice Roll Val of prev Player
+    diceRollBoards[activePlayer].style.display = 'none';
+
+    // setting current Value to 0
+    currentScore = 0;
+    // Display Current Value
+    playersCurrentScore[activePlayer].textContent = currentScore;
+    // Switch Active Player
+    activePlayer = activePlayer === 0 ? 1 : 0;
+    // Toggle Active Player Class for the Overlay Highlight
+    player0El.classList.toggle('player--active');
+    player1El.classList.toggle('player--active');
+    winnerBoxEl.textContent = `Player ${activePlayer + 1}'s turn`;
+  }, 500);
 };
 
 // ******************** 4. Game Over Function ************************
@@ -110,6 +138,13 @@ const gameOver = () => {
 
 const resetToStart = () => {
   // ****************** Resetting All Values to Initial Values and removing additional classes added for styling *****************************************
+
+  // Removing Dice Value
+
+  scoreHd[activePlayer].textContent = '&#8211;';
+  diceScoreSpan[activePlayer].textContent = 'Dice Value';
+  diceRollBoards[activePlayer].style.display = 'none';
+
   // Determining Active Player( Winner ) and Other Player ( Loser ) and removing styles
   let otherPlayer = activePlayer === 0 ? 1 : 0;
   playersEl[activePlayer].classList.remove('winner');
@@ -135,7 +170,16 @@ const resetToStart = () => {
   player0El.classList.add('player--active');
   player1El.classList.remove('player--active');
   activePlayer = 0;
+
+  winnerBoxEl.textContent = `Player ${activePlayer + 1}'s turn`;
+  winnerBoxEl.style.display = 'block';
+
+  // Showing Message Box with the Player Turns
 };
+
+// Showing Message Box to show Players Turn
+
+// const messageBox
 
 // ************************************************************ Game Execution Steps **********************************************************
 
@@ -148,3 +192,6 @@ diceImg.classList.add('hidden');
 rollBtn.addEventListener('click', diceRoll);
 holdBtn.addEventListener('click', holdScore);
 newGameBtn.addEventListener('click', resetToStart);
+
+winnerBoxEl.textContent = `Player ${activePlayer + 1}'s turn`;
+winnerBoxEl.style.display = 'block';
